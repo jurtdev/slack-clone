@@ -2,10 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import AddIcon from '@material-ui/icons/Add';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import StarRateIcon from '@material-ui/icons/StarRate';
+import db from '../firebase';
 
 import { SidebarItems, SidebarChannels } from '../data/SidebarData';
 
-function Sidebar() {
+function Sidebar(props) {
+  const addChannel = () => {
+    const promptName = prompt('Enter Channel Name');
+    console.log(promptName);
+    if (promptName) {
+      db.collection('rooms').add({ name: promptName });
+    }
+  };
+
   return (
     <Container>
       <WorkspaceContainer>
@@ -16,7 +26,7 @@ function Sidebar() {
       </WorkspaceContainer>
       <MainChannels>
         {SidebarItems.map((item) => (
-          <MainChannelItem key={item.text}>
+          <MainChannelItem>
             {item.icon} {item.text}
           </MainChannelItem>
         ))}
@@ -24,15 +34,13 @@ function Sidebar() {
       <ChannelsContainer>
         <NewChannelContainer>
           <div>Channels</div>
-          <AddIcon />
+          <AddIcon onClick={addChannel} />
         </NewChannelContainer>
         <ChannelsList>
-          {SidebarChannels.map((item) => (
-            <Channel key={item.text}>
-              {item.icon}
-              <a href={item.url} target='blank'>
-                {item.text}
-              </a>
+          {props.rooms.map((item) => (
+            <Channel>
+              <StarRateIcon />
+              {item.name}
             </Channel>
           ))}
         </ChannelsList>

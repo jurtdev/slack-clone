@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import InfoIcon from '@material-ui/icons/Info';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+// import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 export default function Login() {
   return (
@@ -17,15 +17,6 @@ export default function Login() {
           <Title>Details</Title> <InfoIcon />
         </ChatDetails>
       </ChatHeader>
-      <ChatMain>
-        <iframe
-          width='560'
-          height='315'
-          src='https://www.youtube.com/embed/8VeiAeR_7os'
-          frameborder='0'
-          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-          allowfullscreen></iframe>
-      </ChatMain>
     </ChatContainer>
   );
 }
@@ -75,14 +66,4 @@ const ChatDetails = styled.div`
 
 const Title = styled.div`
   padding-right: 5px;
-`;
-
-const ChatMain = styled.div`
-  display: flex;
-  justify-content: center;
-  padding-top: 100px;
-
-  i {
-    font-size: 2px;
-  }
 `;
