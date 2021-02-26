@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import HelpIcon from '@material-ui/icons/Help';
-import logo from '../assets/images/jurtdev_logo.jpg';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function Header() {
+export default function Header({ user, signOut }) {
+  const notify = () => toast(`It's time to party!!!`);
+  const notify2 = () =>
+    toast(`Please refer all questions to @cleverqazi, @nazdumanskyy, @daseyffert, @davidrakosi
+  & @jyse`);
+
   return (
     <Container>
       <Main>
-        <AccessTimeIcon />
+        <ToastContainer />
+        <Time onClick={notify} />
         <SearchContainer>
           <Search>
             <input
@@ -17,12 +24,15 @@ export default function Header() {
             />
           </Search>
         </SearchContainer>
-        <HelpIcon />
+        <Help onClick={notify2} />
       </Main>
       <UserContainer>
-        <Name>Christian Jurt</Name>
-        <UserImage>
-          <img src={logo} alt='avatar' />
+        <Name>{user.name}</Name>
+        <UserImage onClick={signOut}>
+          <img
+            src={user.photo ? user.photo : 'https://i.imgur.com/6VBx3io.png'}
+            alt='avatar'
+          />
         </UserImage>
       </UserContainer>
     </Container>
@@ -81,15 +91,30 @@ const UserContainer = styled.div`
 `;
 const Name = styled.div`
   padding-right: 16px;
+  color: ${(props) => props.theme.color};
 `;
 const UserImage = styled.div`
   height: 28px;
   width: 28px;
   /* border: 2px solid white; */
   border-radius: 50%;
+  cursor: pointer;
 
   img {
     width: 100%;
     border-radius: 50%;
+  }
+`;
+
+const Time = styled(AccessTimeIcon)`
+  cursor: pointer;
+  :hover {
+    color: #f1a104;
+  }
+`;
+const Help = styled(HelpIcon)`
+  cursor: pointer;
+  :hover {
+    color: #f1a104;
   }
 `;

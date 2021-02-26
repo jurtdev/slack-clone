@@ -26,9 +26,6 @@ function ToolBar() {
       <FormatListBulletedIcon />
       <LocalPizzaIcon />
       <FontDownloadIcon />
-      <AlternateEmailIcon />
-      <MoodIcon />
-      <AttachFileIcon />
     </Container>
   );
 }
@@ -39,11 +36,9 @@ const Container = styled.div`
   height: 41px;
   padding-left: 20px;
   padding-right: 20px;
-  padding-bottom: 24px;
+  padding-bottom: 0px;
   font-size: 18px;
-  color: #d6d9d7
+  color: #d6d9d7;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
 `;

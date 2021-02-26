@@ -1,46 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function ChatMessage() {
+function ChatMessage({ text, name, image, timestamp }) {
   return (
-    <>
-      <Container>
-        <UserAvatar>
-          <img src='https://randomuser.me/api/portraits/men/0.jpg' />
-        </UserAvatar>
-        <MessageContent>
-          <Name>
-            Gary Davidson
-            <span>2/23/2021 11:13:55 AM EST</span>
-          </Name>
-          <Text>Hey, What's up?</Text>
-        </MessageContent>
-      </Container>
-      <Container>
-        <UserAvatar>
-          <img src='https://randomuser.me/api/portraits/men/3.jpg' />
-        </UserAvatar>
-        <MessageContent>
-          <Name>
-            Larry Brewer
-            <span>2/23/2021 11:15:00 AM EST</span>
-          </Name>
-          <Text>Just creating a Slack Clone!</Text>
-        </MessageContent>
-      </Container>
-      <Container>
-        <UserAvatar>
-          <img src='https://randomuser.me/api/portraits/women/24.jpg' />
-        </UserAvatar>
-        <MessageContent>
-          <Name>
-            Cindy Brown
-            <span>2/23/2021 11:15:20 AM EST</span>
-          </Name>
-          <Text>With who? Clever programmer?</Text>
-        </MessageContent>
-      </Container>
-    </>
+    <Container>
+      <UserAvatar>
+        <img src={image} alt='avatar' />
+      </UserAvatar>
+      <MessageContent>
+        <Name>
+          {name}
+          <span>{new Date(timestamp.toDate()).toUTCString()}</span>
+        </Name>
+        <Text>{text}</Text>
+      </MessageContent>
+    </Container>
   );
 }
 

@@ -1,69 +1,69 @@
 import React from 'react';
 import styled from 'styled-components';
-import InfoIcon from '@material-ui/icons/Info';
-// import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { auth, provider } from '../firebase';
 
-export default function Login() {
+export default function Login(props) {
+  const signIn = () => {
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        const newUser = {
+          name: result.user.displayName,
+          photo: result.user.photoURL,
+        };
+        localStorage.setItem('user', JSON.stringify(newUser));
+        props.setUser(newUser);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
   return (
-    <ChatContainer>
-      <ChatHeader>
-        <ChatContent>
-          <ChatTag>#clever</ChatTag>
-          <ChatDescription>
-            Company-wide announcements and work-based matters
-          </ChatDescription>
-        </ChatContent>
-        <ChatDetails>
-          <Title>Details</Title> <InfoIcon />
-        </ChatDetails>
-      </ChatHeader>
-    </ChatContainer>
+    <Container>
+      <Content>
+        <SlackImg src='https://a.slack-edge.com/80588/marketing/img/icons/icon_slack_hash_colored.png' />
+        <h1>Sign In</h1>
+        <SigninButton onClick={() => signIn()}>
+          Sign in with Google
+        </SigninButton>
+      </Content>
+    </Container>
   );
 }
 
-const ChatContainer = styled.div`
-  height: 100%;
-  background-color: white;
-`;
-
-const ChatHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  height: 64px;
-  border-bottom: 1px solid #523735;
-`;
-
-const ChatContent = styled.div`
-  display: flex;
-  max-width: 300px;
-  flex-wrap: wrap;
-  padding-left: 16px;
-`;
-
-const ChatDescription = styled.div`
-  font-size: 11px;
-`;
-
-const ChatTag = styled.div`
-  font-size: 16px;
-  font-weight: 500;
-`;
-
-const ChatDetails = styled.div`
+const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  background: #f8f8f8;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 100px;
-  padding-right: 16px;
-  align-content: space-around;
-
-  i {
-    padding-left: 5px;
-  }
+`;
+const SlackImg = styled.img`
+  height: 100px;
+  margin-bottom: 20px;
+`;
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  width: 400px;
+  height: 400px;
+  border-radius: 20px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 /24%);
 `;
 
-const Title = styled.div`
-  padding-right: 5px;
+const SigninButton = styled.button`
+  margin-top: 50px;
+  padding: 5px 10px;
+  background-color: #0a8d48;
+  color: white;
+  border: none;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
 `;
